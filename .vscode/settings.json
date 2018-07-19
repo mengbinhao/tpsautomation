@@ -1,0 +1,13 @@
+{
+    
+    "python.pythonPath": "C:\\Users\\T5810\\Desktop\\python_envs\\env36\\Scripts\\python.exe",
+    //"python.pythonPath": "C:\\Users\\T5810\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
+    "python.linting.pylintEnabled": false,
+    "workbench.iconTheme": "vscode-icons",
+    "editor.accessibilitySupport": "off",
+    "editor.fontSize": 18,
+    "terminal.integrated.fontSize": 18,
+    "explorer.confirmDelete": false,
+    "files.autoSave": "off"
+}
+

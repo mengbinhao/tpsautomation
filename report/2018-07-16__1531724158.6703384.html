@@ -1,0 +1,105 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>北航TPS自动化测试报告</title>
+            <link href="../css/bootstrap.min.css" rel="stylesheet">
+            <h2 style="font-family: Microsoft YaHei;padding-buttom:5px">北航TPS自动化测试报告</h2>
+            <p class='attribute' style="padding-buttom:5px"><strong>测试结果 : </strong> 共<font color="black">3</font>条case, Pass: <font color="green">1</font>, Fail: <font color="red">2</font></p>
+            <style type="text/css" media="screen">
+                body { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px;}
+            </style>
+        </head>
+        <body>
+            <table id='result_table' class="table table-bordered table-hover">   
+                <tr id='header_row' class="text-center active" style="font-weight: bold;font-size: 14px;">
+                    <th width="50px">序号</th>
+                    <th width="150px">用例名</th>
+                    <th width="110px">用例执行结果</th>
+                    <th width="100px">执行时间</th>
+                    <th width="100px">执行时长</th>
+                    <th>原因</th>
+                </tr>
+                
+        <tr class='danger'>
+            <td>1</td>
+            <td>\common\common01.py</td>
+            <td>fail</td>
+            <td>2018-07-16</td>
+            <td>1 sec</td>
+            <td>File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\common\common01.py", line 7
+    return 1234567899999
+    ^
+SyntaxError: 'return' outside function</td>
+        </tr>
+        
+        <tr class='success'>
+            <td>2</td>
+            <td>\startandexit\01_login.py</td>
+            <td>pass</td>
+            <td>2018-07-16</td>
+            <td>1 min, 2 sec</td>
+            <td></td>
+        </tr>
+        
+        <tr class='danger'>
+            <td>3</td>
+            <td>\startandexit\02_exit.py</td>
+            <td>fail</td>
+            <td>2018-07-16</td>
+            <td>5 sec</td>
+            <td>C:\IndelPlan\IndelPlanV2.0.exe
+Traceback (most recent call last):
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\uia_defines.py", line 232, in get_elem_interface
+    iface = cur_ptrn.QueryInterface(cls_name)
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\comtypes\__init__.py", line 1158, in QueryInterface
+    self.__com_QueryInterface(byref(iid), byref(p))
+ValueError: NULL COM pointer access
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\controls\uiawrapper.py", line 417, in close
+    iface = self.iface_window
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\controls\uiawrapper.py", line 131, in __get__
+    value = self.fget(obj)
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\controls\uiawrapper.py", line 321, in iface_window
+    return uia_defs.get_elem_interface(elem, "Window")
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\uia_defines.py", line 234, in get_elem_interface
+    raise NoPatternInterfaceError()
+pywinauto.uia_defines.NoPatternInterfaceError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\operation\commonoperation.py", line 61, in exit_current_connect_application
+    self._pw.kill_application()
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\model\pywinautowrapper.py", line 50, in kill_application
+    self._app.kill()
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 1224, in kill
+    win.close()
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\controls\uiawrapper.py", line 423, in close
+    self.type_keys("{ESC}")
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\base_wrapper.py", line 845, in type_keys
+    self.verify_actionable()
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\base_wrapper.py", line 593, in verify_actionable
+    self.verify_enabled()
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\base_wrapper.py", line 604, in verify_enabled
+    raise ElementNotEnabled()
+pywinauto.base_wrapper.ElementNotEnabled
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\startandexit\02_exit.py", line 8, in <module>
+    co_obj.exit_current_connect_application(tpsexepath)
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\operation\commonoperation.py", line 64, in exit_current_connect_application
+    raise ValueError('exit_current_connect_application fail')
+ValueError: exit_current_connect_application fail</td>
+        </tr>
+        
+            </table>
+        </body>
+        </html>
+        
