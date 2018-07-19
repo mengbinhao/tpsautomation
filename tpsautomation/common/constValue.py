@@ -33,8 +33,13 @@ class ConstValue():
 
     CASE_PASS_RESULT = 'pass'
     CASE_FAIL_RESULT = 'fail'
+    CASE_TYPE_TOUDAO = 'toudao'
+    CASE_TYPE_TIDAO = 'tidao'
+    CASE_TYPE_PROWESS = 'prowess'
 
     HTML_ACTIVE_CLASS = 'active'
     HTML_PASS_CLASS = 'success'
     HTML_FAIL_CLASS = 'danger'
     HTML_REASON_NONE = 'None'
+
+    UTF_8_STR = 'utf-8'

@@ -28,7 +28,7 @@ def test_instantiation():
     assert excinfo.type.__name__ == 'ValueError'
 
     with pytest.raises(ValueError) as excinfo:
-        p.Basic(1, 'a' * 33)
+        p.Basic(1, 'a' * 333)
     assert excinfo.type.__name__ == 'ValueError' 
 
     with pytest.raises(TypeError) as excinfo:

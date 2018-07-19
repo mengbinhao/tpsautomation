@@ -19,6 +19,8 @@
 
 - pyautogui
 
+- yapf  (vscode  --> settings.json -->"python.formatting.provider": "yapf")
+
 - add path C:\Users\XXX\Desktop\tpsautomation for looking  project package
 
   ```
@@ -57,13 +59,45 @@
     - add to path
     - install virtualenv and virtualenvwrapper-win
     - create mkvirtualenv  for project and install third lib
+
 2.  install vscode 
     -   copy extensions
     -   copy and change setting.json、launch.json (point to virtualenv)
+
 3.  install Typora ( change max-width)    
-4.  install node、git、GitHub Desktop if needed
+
+4.  install node、git if needed
+
+    -   optinal
+
+        ```
+        git config --global user.name "xxxx" 
+        git config --global user.email "xxxx@yyy.com"
+        git config --global credential.helper store   //在Git Bash输入这个命令就可以了
+        ```
+
+    -   ```
+        //new project
+        mkdir wap
+        cd wap
+        git init
+        type nul>xxx
+        git add xxx
+        git commit -m "first commit"
+        git remote add origin https://xxxxxxxxxxxxxx/package.git
+        git push -u origin master
+        
+        //exist project
+        cd existing_git_repo
+        git remote add origin https://xxxxxxxxxxxxxx/package.git
+        git push -u origin master
+        
+        //clone
+        git clone https://git.oschina.net/name/test.git
+        ```
+
 5.  change project
-    -   change C:\Users\computer_name  to  new computer_nme in project file
+    -   change C:\Users\computer_name  to  new computer_name in project file
 
     -   change TPS location in project files
 

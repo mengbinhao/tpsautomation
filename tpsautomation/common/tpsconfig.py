@@ -11,7 +11,6 @@ import tpsautomation.common.constValue as cv
 class configWrapper(object):
 
     config = {}
-    # conf_path = r'C:\Users\T5810\Desktop\tpsautomation'
     file_name = 'conf.ini'
 
     """ check key of dict """

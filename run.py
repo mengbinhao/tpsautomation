@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
 ''' main py '''
 
 import subprocess
@@ -18,25 +17,36 @@ import tpsautomation.model.caseresult as cr
 import tpsautomation.operation.commonoperation as co
 import tpsautomation.report.htmlreport as hr
 
-CASE_ROOT = r'C:\Users\T5810\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao'
-
-
 def init():
     tc.configWrapper.init_config()
     print('Initialize config Done')
-    logger_path_name = tc.configWrapper.get_special_value_in_cache('logger_path_name')
-    if (cv.ConstValue.DICT_NON_EXIST_VALUE == logger_path_name):
+    logger_path_name = tc.configWrapper.config.get('logger_path_name', cv.ConstValue.DICT_NON_EXIST_VALUE)
+    if (logger_path_name == cv.ConstValue.DICT_NON_EXIST_VALUE):
         raise ValueError
     logging.config.fileConfig(logger_path_name)
     print('Initialize logging Done')
 
 
 def get_tps_env(dict):
-    tpsexepath = tc.configWrapper.get_special_value_in_cache('tpsexepath')
-    tpsroot = tc.configWrapper.get_special_value_in_cache('tpsroot')
+    tpsexepath = dict.get('tpsexepath', cv.ConstValue.DICT_NON_EXIST_VALUE)
+    tpsroot = dict.get('tpsroot', cv.ConstValue.DICT_NON_EXIST_VALUE)
     if tpsexepath == cv.ConstValue.DICT_NON_EXIST_VALUE or tpsroot == cv.ConstValue.DICT_NON_EXIST_VALUE:
         raise ValueError
-    return tpsexepath,tpsroot
+    return tpsexepath, tpsroot
+
+def get_case_type(args, dict):
+    try:
+        cases_bh_toudao = 'cases_bh_toudao'
+        if args[1]:
+            if args[1].lower() == cv.ConstValue.CASE_TYPE_TOUDAO:
+                return dict.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
+            elif args[1].lower() == cv.ConstValue.CASE_TYPE_TIDAO:
+                return dict.get('cases_bh_tidao', cv.ConstValue.CASE_TYPE_TIDAO)
+            elif args[1].lower() == cv.ConstValue.CASE_TYPE_PROWESS:
+                return dict.get('cases_prowess', cv.ConstValue.CASE_TYPE_PROWESS) 
+    except Exception as ex:
+       return dict.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
+    
 
 if __name__ == '__main__':
     print('Automation Start')
@@ -46,20 +56,26 @@ if __name__ == '__main__':
         tpsexepath, tpsroot = get_tps_env(tc.configWrapper.config)
 
         #kill tps if needed
-        co_obj = co.CommonOperation()
-        co_obj.kill_tps_application_if_needed(tpsexepath)
+        #co_obj = co.CommonOperation()
+        #co_obj.kill_tps_application_if_needed(tpsexepath)
 
+        cases_root = get_case_type(sys.argv, tc.configWrapper.config)
         #get cases list
-        case_list = fu.FileUtils.get_case_list(CASE_ROOT)
+        case_list = fu.FileUtils.get_case_list(cases_root)
+        #case like 01_xxx,  02_yyy
         case_list.sort()
         logging.debug('excute %d cases------%s', len(case_list), case_list)
         count = 1
         for case in case_list:
             run_result = ''
-            html_class = 'active'
+            html_class = cv.ConstValue.HTML_ACTIVE_CLASS
             run_reason = ''
             start_time = time.time()
-            x = subprocess.Popen([cv.ConstValue.DEFAULT_PYTHON_EXE, case, tpsexepath], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=tpsroot)
+            x = subprocess.Popen(
+                [cv.ConstValue.DEFAULT_PYTHON_EXE, case, tpsexepath],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                cwd=tpsroot)
             #x.wait()
             oc = x.communicate()
             end_time = time.time()
@@ -70,19 +86,23 @@ if __name__ == '__main__':
             else:
                 run_result = cv.ConstValue.CASE_FAIL_RESULT
                 html_class = cv.ConstValue.HTML_FAIL_CLASS
-                run_reason = oc[0].decode('utf-8')
+                run_reason = oc[0].decode(cv.ConstValue.UTF_8_STR)
             case = case.replace(CASE_ROOT, '')
-            case_result = cr.CaseResult(count, case, run_result, datu.DateAndTimeUtils.get_today_as_str(), math.ceil(end_time - start_time), html_class, run_reason)
+            case_result = cr.CaseResult(
+                count, case, run_result,
+                datu.DateAndTimeUtils.get_today_as_str(),
+                math.ceil(end_time - start_time), html_class, run_reason)
             result_list.append(du.DictUtils.class_to_dict(case_result))
             count += 1
     #any subprecess exception can not catch here
     except Exception as ex:
         trace = sys.exc_info()[2]
-        logging.error('file: %s function: %s lineno: %d args: %s)',
-                              __name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        logging.error('file: %s function: %s lineno: %d args: %s)', __name__,
+                      trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
     finally:
         html_title = tc.configWrapper.get_special_value_in_cache('html_title')
-        html_report_path = tc.configWrapper.get_special_value_in_cache('html_report_path')
-        hr.HTMLReport.generete_html_report(
-            result_list, html_title, html_report_path)
+        html_report_path = tc.configWrapper.get_special_value_in_cache(
+            'html_report_path')
+        hr.HTMLReport.generete_html_report(result_list, html_title,
+                                           html_report_path)
         print('Automation Finish')

@@ -1,7 +1,5 @@
 
 
-conf.ini 修改地方太多！！！
-
 ### 1.python invoke python (how to get return object)      异常处理子异常catch不到
 
 ### 2. try exception

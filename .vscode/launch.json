@@ -15,7 +15,7 @@
             "pythonPath": "C:/Users/T5810/Desktop/python_envs/env36/Scripts/python.exe",
             //"pythonPath":"C:/Users/T5810/AppData/Local/Programs/Python/Python37/python.exe",
             "args": [
-                
+                "toudao"
             ],
             "debugOptions": [
                 "RedirectOutput",
