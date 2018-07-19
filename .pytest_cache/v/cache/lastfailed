@@ -1,0 +1,9 @@
+{
+  "tpsautomation/test/common/test_config.py::test_init_config_with_section": true,
+  "tpsautomation/test/utils/test_dateandtimeutils.py::test_changeTime": true,
+  "tpsautomation/test/utils/test_dateandtimeutils.py::test_get_delta_between_date": true,
+  "tpsautomation/test/utils/test_dateandtimeutils.py::test_get_time_as_datetime": true,
+  "tpsautomation/test/utils/test_dateandtimeutils.py::test_get_today": true,
+  "tpsautomation/test/utils/test_fileutils.py::test_search_file": true,
+  "tpsautomation/test/utils/test_listutils.py::test_is_str_like": true
+}

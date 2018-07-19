@@ -1,0 +1,104 @@
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>北航TPS自动化测试报告</title>
+            <link href="../css/bootstrap.min.css" rel="stylesheet">
+            <h2 style="font-family: Microsoft YaHei;padding-buttom:5px">北航TPS自动化测试报告</h2>
+            <p class='attribute' style="padding-buttom:5px"><strong>测试结果 : </strong> 共<font color="black">3</font>条case, Pass: <font color="green">0</font>, Fail: <font color="red">3</font></p>
+            <style type="text/css" media="screen">
+                body { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px;}
+            </style>
+        </head>
+        <body>
+            <table id='result_table' class="table table-bordered table-hover">   
+                <tr id='header_row' class="text-center active" style="font-weight: bold;font-size: 14px;">
+                    <th width="50px">序号</th>
+                    <th width="150px">用例名</th>
+                    <th width="110px">用例执行结果</th>
+                    <th width="100px">执行时间</th>
+                    <th width="100px">执行时长</th>
+                    <th>原因</th>
+                </tr>
+                
+        <tr class='danger'>
+            <td>1</td>
+            <td>\common\common01.py</td>
+            <td>fail</td>
+            <td>2018-07-16</td>
+            <td>4 sec</td>
+            <td>File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\common\common01.py", line 7
+    return 1234567899999
+    ^
+SyntaxError: 'return' outside function</td>
+        </tr>
+        
+        <tr class='danger'>
+            <td>2</td>
+            <td>\startandexit\01_login.py</td>
+            <td>fail</td>
+            <td>2018-07-16</td>
+            <td>17 sec</td>
+            <td>Traceback (most recent call last):
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 992, in start
+    start_info)				# STARTUPINFO structure.
+pywintypes.error: (2, 'CreateProcess', '系统找不到指定的文件。')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\startandexit\01_login.py", line 9, in <module>
+    co_obj.start_tps('ffff')
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\operation\commonoperation.py", line 32, in start_tps
+    self._pw.start(tpsexepath)
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\model\pywinautowrapper.py", line 28, in start
+    self._app.start(tool_name)
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 997, in start
+    raise AppStartError(message)
+pywinauto.application.AppStartError: Could not create the process "ffff"
+Error returned by CreateProcess: (2, 'CreateProcess', '系统找不到指定的文件。')</td>
+        </tr>
+        
+        <tr class='danger'>
+            <td>3</td>
+            <td>\startandexit\02_exit.py</td>
+            <td>fail</td>
+            <td>2018-07-16</td>
+            <td>8 sec</td>
+            <td>Traceback (most recent call last):
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\timings.py", line 427, in wait_until_passes
+    func_val = func(*args)
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 1381, in process_from_module
+    raise ProcessNotFoundError(message)
+pywinauto.application.ProcessNotFoundError: Could not find any accessible process with a module of 'C:\IndelPlan\IndelPlanV2.0.exe'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 936, in connect
+    ProcessNotFoundError, kwargs['path'],
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\timings.py", line 449, in wait_until_passes
+    raise err
+pywinauto.timings.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\startandexit\02_exit.py", line 7, in <module>
+    co_obj.logout_tps(tpsexepath)
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\operation\commonoperation.py", line 61, in logout_tps
+    self.connect_tps(tpsexepath)
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\operation\commonoperation.py", line 40, in connect_tps
+    self._pw.connect(tpsexepath)
+  File "C:\Users\OUR\Desktop\tpsautomation\tpsautomation\model\pywinautowrapper.py", line 40, in connect
+    self._app.connect(path = title_or_path)
+  File "C:\Users\OUR\AppData\Local\Programs\Python\Python36\lib\site-packages\pywinauto\application.py", line 939, in connect
+    raise ProcessNotFoundError('Process "{}" not found!'.format(kwargs['path']))
+pywinauto.application.ProcessNotFoundError: Process "C:\IndelPlan\IndelPlanV2.0.exe" not found!</td>
+        </tr>
+        
+            </table>
+        </body>
+        </html>
+        
