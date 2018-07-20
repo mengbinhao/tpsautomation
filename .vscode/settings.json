@@ -8,7 +8,6 @@
     "editor.fontSize": 18,
     "terminal.integrated.fontSize": 18,
     "explorer.confirmDelete": false,
-    "files.autoSave": "off",
-    "python.formatting.provider": "yapf"
+    "files.autoSave": "off"
 }
 

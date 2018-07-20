@@ -1,15 +1,23 @@
 ### 1 skeleton
 
-- bin 可执行文件
+- bin
+
 - doc
-- tpsautomation    src、module
-- tpsautomation\test      test related
-- report (static generate)   // static  / bottle  / PyH / jinja2
+
+- tpsautomation下    common、module、operation、module、utils
+
+- report (static generate)   (bottle  / PyH / jinja2)
+
+- tpsautomation\testcases    testcases
+
+- tpsautomation\test      unittest
+
+  
 
 
 ### 2 requirements
 
-- use some application to check your app backend under gui-inspect-tool folder
+- use some application to check your app backend (win32 or uia) under gui-inspect-tool folder
 
 - python 3.6.5
 
@@ -19,9 +27,7 @@
 
 - pyautogui
 
-- yapf  (vscode  --> settings.json -->"python.formatting.provider": "yapf")
-
-- add path C:\Users\XXX\Desktop\tpsautomation for looking  project package
+- add  PYTHONPATH=C:\Users\xxxxxx\Desktop\tpsautomation to path (so can find custom module and use pytest)
 
   ```
   # locate to rootdir of pytest, this also is root of project
@@ -49,7 +55,7 @@
 
 1. Win 7 professional 64 bit
 2. font size (100%, system recommend)
-3. monitot  resolution (1920 * 1080)
+3. monitor  resolution (1920 * 1080)
 4. if locate with coordinate, software must not change UI
 5. can not use two monitor, the display location of app is weird
 
@@ -62,48 +68,44 @@
 
 2.  install vscode 
     -   copy extensions
-    -   copy and change setting.json、launch.json (point to virtualenv)
+    -   copy and change setting.json、launch.json (point to virtualenv) for this project
 
 3.  install Typora ( change max-width)    
 
 4.  install node、git if needed
 
-    -   optinal
+    
 
-        ```
-        git config --global user.name "xxxx" 
-        git config --global user.email "xxxx@yyy.com"
-        git config --global credential.helper store   //在Git Bash输入这个命令就可以了
-        ```
-
-    -   ```
-        //new project
-        mkdir wap
-        cd wap
-        git init
-        type nul>xxx
-        git add xxx
-        git commit -m "first commit"
-        git remote add origin https://xxxxxxxxxxxxxx/package.git
-        git push -u origin master
-        
-        //exist project
-        cd existing_git_repo
-        git remote add origin https://xxxxxxxxxxxxxx/package.git
-        git push -u origin master
-        
-        //clone
-        git clone https://git.oschina.net/name/test.git
-        ```
+    ```
+    git config --global user.name "xxxx" 
+    git config --global user.email "xxxx@yyy.com"
+    git config --global credential.helper store   //在Git Bash输入这个命令就可以了
+    ```
+    ```
+    //new project
+    mkdir wap
+    cd wap
+    git init
+    type nul>xxx
+    git add xxx
+    git commit -m "first commit"
+    git remote add origin https://xxxxxxxxxxxxxx/package.git
+    git push -u origin master
+    
+    //exist project
+    cd existing_git_repo
+    git remote add origin https://xxxxxxxxxxxxxx/package.git
+    git push -u origin master
+    
+    //clone
+    git clone https://git.oschina.net/name/test.git
+    ```
 
 5.  change project
-    -   change C:\Users\computer_name  to  new computer_name in project file
+    -   change C:\Users\computer_name  to  new computer_name in project file  (*.py  .ini)
 
-    -   change TPS location in project files
+    -   change TPS location in project files (.ini)
 
-    -   add PYTHONPATH=C:\Users\xxxxxx\Desktop\tpsautomation to path (so can find custom module and use pytest)
-
-        eg: pytest -s .\tpsautomation\test\model\test_case.py
 
 
 
