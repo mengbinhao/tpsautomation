@@ -11,6 +11,7 @@ def test_get_date_and_time_as_datetime():
                    ]
     title = '自动化测试报告'
     path = r'C:\Users\T5810\Desktop\tpsautomation\report'
+    casepath = r'C:\Users\T5810\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao'
     with pytest.raises(TypeError) as excinfo:
         hr.HTMLReport.generete_html_report()
     assert excinfo.type.__name__ == 'TypeError'
@@ -20,4 +21,4 @@ def test_get_date_and_time_as_datetime():
     assert excinfo.type.__name__ == 'TypeError'
 
     #result_list = []
-    hr.HTMLReport.generete_html_report(result_list, title, path)
+    hr.HTMLReport.generete_html_report(result_list, title, path, casepath)

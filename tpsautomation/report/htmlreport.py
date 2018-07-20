@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 ''' generate HTMLReport '''
-
 import os
 import tpsautomation.common.constValue as cv
 import tpsautomation.utils.dateandtimeutils as datu
@@ -17,8 +16,9 @@ class HTMLReport(object):
             <meta charset="UTF-8">
             <title>%(title)s</title>
             <link href="../css/bootstrap.min.css" rel="stylesheet">
-            <h2 style="font-family: Microsoft YaHei;padding-buttom:5px">%(title)s</h2>
-            <p class='attribute' style="padding-buttom:5px"><strong>测试结果 : </strong> 共<font color="blue">%(count)s</font>条cases, Pass: <font color="green">%(passed)s</font>, Fail: <font color="red">%(failed)s</font></p>
+            <h2 style="font-family: Microsoft YaHei;margin-bottom:20px">%(title)s</h2>
+            <p class='attribute' style="margin-bottom:10px"><strong>cases路径:</strong> %(casepath)s</p>
+            <p class='attribute' style="margin-bottom:10px"><strong>测试结果 : </strong> 共<font color="blue">%(count)s</font>条cases, Pass: <font color="green">%(passed)s</font>, Fail: <font color="red">%(failed)s</font></p>
             <style type="text/css" media="screen">
                 body { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px;}
             </style>
@@ -57,7 +57,7 @@ class HTMLReport(object):
         """
 
     @staticmethod
-    def generete_html_report(result_list, title, path):
+    def generete_html_report(result_list, title, path, casepath):
         table_tr0 = ''
         count = 0
         numfail = 0
@@ -65,10 +65,10 @@ class HTMLReport(object):
         output = ''
         if len(result_list) > 0:
             output = HTMLReport.genarete_table(
-                result_list, table_tr0, numfail, numsucc, title)
+                result_list, table_tr0, numfail, numsucc, title, casepath)
         else:
             output = HTMLReport.genarete_empty_table(
-                result_list, table_tr0, numfail, numsucc, title)
+                result_list, table_tr0, numfail, numsucc, title, casepath)
 
         name = datu.DateAndTimeUtils.get_today_and_timestamp_as_str_from_timestamp()
         
@@ -76,7 +76,7 @@ class HTMLReport(object):
             f.write(output.encode('utf-8'))
 
     @staticmethod
-    def genarete_table(result_list, table_tr0, numfail, numsucc, title):
+    def genarete_table(result_list, table_tr0, numfail, numsucc, title, casepath):
         for i in result_list:
             table_td = HTMLReport.TABLE_TMPL % i
             table_tr0 += table_td
@@ -84,18 +84,19 @@ class HTMLReport(object):
                 numsucc += 1
             elif i['runresult'].lower() == cv.ConstValue.CASE_FAIL_RESULT:
                 numfail += 1
-        return HTMLReport.genarete_output(len(result_list), table_tr0, numfail, numsucc, title)
+        return HTMLReport.genarete_output(len(result_list), table_tr0, numfail, numsucc, title, casepath)
 
     @staticmethod
-    def genarete_empty_table(result_list, table_tr0, numfail, numsucc, title):
+    def genarete_empty_table(result_list, table_tr0, numfail, numsucc, title, casepath):
         table_td = HTMLReport.TABLE_TMPL_NO_CASE
         table_tr0 += table_td
-        return HTMLReport.genarete_output(len(result_list), table_tr0, numfail, numsucc, title)
+        return HTMLReport.genarete_output(len(result_list), table_tr0, numfail, numsucc, title, casepath)
 
     @staticmethod
-    def genarete_output(length, table_tr0, numfail, numsucc, title):
+    def genarete_output(length, table_tr0, numfail, numsucc, title, casepath):
         output = HTMLReport.HTML_TMPL % dict(
             title=title,
+            casepath=casepath,
             count=length,
             passed=numsucc,
             failed=numfail,

@@ -27,6 +27,8 @@
 
 - pyautogui
 
+- autopep8  (format py code     vscode -> setting.json --> "python.formatting.provider": "autopep8")
+
 - add  PYTHONPATH=C:\Users\xxxxxx\Desktop\tpsautomation to path (so can find custom module and use pytest)
 
   ```

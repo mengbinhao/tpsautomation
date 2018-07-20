@@ -91,3 +91,7 @@ class FileUtils(object):
                if file_name.endswith(cv.ConstValue.PYTHON_SUFFIX):
                     result.append(root + os.sep + file_name)
         return result
+    
+    @staticmethod
+    def get_case_list_exclude_folders(root, exclude_folders):
+        pass

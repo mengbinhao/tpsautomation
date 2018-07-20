@@ -40,6 +40,6 @@ class ConstValue():
     HTML_ACTIVE_CLASS = 'active'
     HTML_PASS_CLASS = 'success'
     HTML_FAIL_CLASS = 'danger'
-    HTML_REASON_NONE = 'None'
+    HTML_REASON_SUCCESS = 'success'
 
     UTF_8_STR = 'utf-8'

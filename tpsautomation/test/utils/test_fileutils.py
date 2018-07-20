@@ -51,13 +51,16 @@ def test_read_file_last_line():
         fu.FileUtils.read_small_file_last_line(r'C:\Users\T5810\Desktop\tpsautomation\logs\myapp_notexists.log')
     assert excinfo.type.__name__ == 'FileNotFoundError'
 
+@pytest.mark.skip
 def test_get_case_list():
     ret = fu.FileUtils.get_case_list(r'C:\Users\T5810\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao')
-    assert len(ret) == 3
+    assert len(ret) == 4
     
     with pytest.raises(TypeError) as excinfo:
         fu.FileUtils.get_case_list()
     assert excinfo.type.__name__ == 'TypeError'
 
+def test_get_case_list_exclude_folder():
+    pass
     
 

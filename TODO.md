@@ -1,6 +1,6 @@
 
 
-### 1.python invoke python (how to get return object)      异常处理子异常catch不到
+### 1.python invoke subprocess python (can not get return object)      
 
 ### 2. try exception
 
