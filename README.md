@@ -113,7 +113,7 @@
     git push -u origin master
     
     //clone
-    git clone https://git.oschina.net/name/test.git
+    git clone https://xxxxxxxxxxxxxxxxxxxx.git
     
     //when local is not sync with remote
     1 git pull origin master
