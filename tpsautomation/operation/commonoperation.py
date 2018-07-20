@@ -23,8 +23,7 @@ class CommonOperation(object):
             self._pw.connect(tpsexepath)
             self._pw.kill_application()
         except Exception as ex:
-            trace = sys.exc_info()[2]
-            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'kill_tps_application_if_needed_fail'])
             pass
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'kill_tps_application_if_needed_successful'])
@@ -36,6 +35,7 @@ class CommonOperation(object):
         except Exception as ex:
             trace = sys.exc_info()[2]
             tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            raise
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'start_tps_successful'])
             self.sleep(30)
@@ -46,6 +46,8 @@ class CommonOperation(object):
         except Exception as ex:
             trace = sys.exc_info()[2]
             tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            #have to so main process can know subprocss fail 
+            raise
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'connect_tps_successful'])
             self.sleep()
@@ -62,6 +64,7 @@ class CommonOperation(object):
         except Exception as ex:
             trace = sys.exc_info()[2]
             tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            raise
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'login_tps_successful'])
 
@@ -73,6 +76,7 @@ class CommonOperation(object):
         except Exception as ex:
             trace = sys.exc_info()[2]
             tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            raise
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'logout_tps_successful'])
 
@@ -85,6 +89,7 @@ class CommonOperation(object):
             tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
             # capture_screenshot for future use
             self._pg.capture_screenshot()
+            raise
         else:
             tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'close_tps_by_x_successful'])
 

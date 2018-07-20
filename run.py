@@ -46,20 +46,19 @@ def get_case_type(args, dict):
 if __name__ == '__main__':
     print('Automation Start')
     result_list = []
-    try:
+    try:  
         init()
         tpsexepath, tpsroot = get_tps_env(tc.configWrapper.config)
 
         #kill tps if needed
-        #co_obj = co.CommonOperation()
-        #co_obj.kill_tps_application_if_needed(tpsexepath)
+        co_obj = co.CommonOperation()
+        co_obj.kill_tps_application_if_needed(tpsexepath)
 
         cases_root = get_case_type(sys.argv, tc.configWrapper.config)
-        #get cases list
         case_list = fu.FileUtils.get_case_list(cases_root)
         #case like 01_xxx,  02_yyy
         case_list.sort()
-        tl.LoggingWrapper.record_debug(r'excute %s cases------%s', *[len(case_list), str(case_list)])
+        tl.LoggingWrapper.record_debug(r'excute %s cases------%s', *[len(case_list), case_list])
         count = 1
         for case in case_list:
             run_result = ''

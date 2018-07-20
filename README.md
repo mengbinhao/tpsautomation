@@ -1,4 +1,4 @@
-### 1 skeleton
+### 1  skeleton
 
 - bin
 
@@ -12,10 +12,18 @@
 
 - tpsautomation\test      unittest
 
+- report 
+
+- logs
+
+- other
+
+- pytest.ini  /  logger.conf  / conf.ini  /  TODO.md  /  README.md
+
   
 
 
-### 2 requirements
+### 2  requirements
 
 - use some application to check your app backend (win32 or uia) under gui-inspect-tool folder
 
@@ -38,7 +46,8 @@
   ```
 
 
-### 3 specification  
+
+### 3  specification  
 
 1. 包名、模块名、局部变量名、函数名 (全小写+下划线)
 
@@ -53,15 +62,19 @@
    example：ClassName()
 
 
-### 5 TPS  requirement
+
+### 4 TPS  requirement
 
 1. Win 7 professional 64 bit
 2. font size (100%, system recommend)
 3. monitor  resolution (1920 * 1080)
-4. if locate with coordinate, software must not change UI
+4. UI can not be changed because locate with coordinate
 5. can not use two monitor, the display location of app is weird
+6. input method need to english language
 
-### 6 Transfer
+
+
+### 5 Transfer
 
 1.  install python (maybe more than one version)
     - add to path
@@ -102,7 +115,16 @@
     //clone
     git clone https://git.oschina.net/name/test.git
     
-    git pull origin master
+    //when local is not sync with remote
+    1 git pull origin master
+    2 there ways to do
+    	git reset --hard origin/master   //sync remote to local, override local
+    	git add filename ->  git commit -m "message" --> git push -u origin master //sync local to remote
+    	git reset --hard HEAD // back to before merge
+    
+    //find each HEAD to reset
+    git reflot
+    git reset --hard  version
     ```
 
 5.  change project
