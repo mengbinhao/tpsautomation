@@ -101,6 +101,8 @@
     
     //clone
     git clone https://git.oschina.net/name/test.git
+    
+    git pull origin master
     ```
 
 5.  change project
