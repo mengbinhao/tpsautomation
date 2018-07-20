@@ -3,13 +3,12 @@
 ''' main py '''
 
 import subprocess
-import logging
-import logging.config
 import time
 import math
 import sys
 import tpsautomation.common.constValue as cv
 import tpsautomation.common.tpsconfig as tc
+import tpsautomation.common.tpslogging as tl
 import tpsautomation.utils.fileutils as fu
 import tpsautomation.utils.dictutils as du
 import tpsautomation.utils.dateandtimeutils as datu
@@ -21,13 +20,6 @@ import tpsautomation.report.htmlreport as hr
 def init():
     tc.configWrapper.init_config()
     print('Initialize config Done')
-    logger_path_name = tc.configWrapper.config.get(
-        'logger_path_name', cv.ConstValue.DICT_NON_EXIST_VALUE)
-    if (logger_path_name == cv.ConstValue.DICT_NON_EXIST_VALUE):
-        raise ValueError
-    logging.config.fileConfig(logger_path_name)
-    print('Initialize logging Done')
-
 
 def get_tps_env(dict):
     tpsexepath = dict.get('tpsexepath', cv.ConstValue.DICT_NON_EXIST_VALUE)
@@ -55,7 +47,6 @@ if __name__ == '__main__':
     print('Automation Start')
     result_list = []
     try:
-        1/0
         init()
         tpsexepath, tpsroot = get_tps_env(tc.configWrapper.config)
 
@@ -68,7 +59,7 @@ if __name__ == '__main__':
         case_list = fu.FileUtils.get_case_list(cases_root)
         #case like 01_xxx,  02_yyy
         case_list.sort()
-        logging.debug('excute %d cases------%s', len(case_list), case_list)
+        tl.LoggingWrapper.record_debug(r'excute %s cases------%s', *[len(case_list), str(case_list)])
         count = 1
         for case in case_list:
             run_result = ''
@@ -102,8 +93,7 @@ if __name__ == '__main__':
     #can not catch any subprocess exception
     except Exception as ex:
         trace = sys.exc_info()[2]
-        logging.error('file: %s function: %s lineno: %d args: %s)', __name__,
-                      trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
     finally:
         html_title = tc.configWrapper.config.get(
             'html_title', cv.ConstValue.DICT_NON_EXIST_VALUE)

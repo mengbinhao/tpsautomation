@@ -41,6 +41,20 @@ class LoggingWrapper(object):
             logging.getLogger(__name__).debug(str(e), exc_info=True)
             raise e 
 
+    ''' file_name is __file__, not __name__ '''
     @staticmethod
-    def record_logger(file_name, fun_name, line_number, args):
-        logging.error('file: %s function: %s lineno: %d args: %s)',file_name, file_name, line_number, args)
+    def record_error(file_name, fun_name, line_number, args):
+        logging.error('file: %s function: %s lineno: %d args: %s)',file_name, fun_name, line_number, args)
+
+    ''' use eval handle Dynamic param, but can not record detailed indo in log
+        like :2018-07-20 14:24:30       <string>  [line:1] root:  DEBUG    excute 3 cases------[case1, case2, case3]
+        message_template only use %s
+    '''
+    @staticmethod
+    def record_debug(message_template, *args):
+        tmp = "logging.debug(message_template, "
+        for item in args:
+            tmp += 'r\'' + str(item) + '\''
+            tmp += ', '
+        tmp = tmp[:-2] + ")"
+        eval(tmp)

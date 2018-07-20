@@ -27,7 +27,6 @@ class PythonBuildInType(Enum):
     complexType = 'complex'
 
 """
-if __name__ == '__main__':
     for name, member in PythonBuildInType.__members__.items():
         print(name, '=>', member, member.value)
 """

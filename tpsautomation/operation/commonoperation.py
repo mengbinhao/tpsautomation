@@ -4,7 +4,6 @@
 ''' wrapper method for operating common function of TPS'''
 
 import time
-import logging
 import sys
 import tpsautomation.common.tpslogging as tl
 import tpsautomation.model.pywinautowrapper as pw
@@ -19,32 +18,37 @@ class CommonOperation(object):
         self._pg = pg.PyautoGUIWrapper()
 
     ''' do not handle exception '''
-
     def kill_tps_application_if_needed(self, tpsexepath):
         try:
             self._pw.connect(tpsexepath)
             self._pw.kill_application()
         except Exception as ex:
-            logging.debug('close_if_exists fail')
+            trace = sys.exc_info()[2]
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
             pass
-        self.sleep()
+        else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'kill_tps_application_if_needed_successful'])
+            self.sleep()
 
     def start_tps(self, tpsexepath):
         try:
             self._pw.start(tpsexepath)
         except Exception as ex:
-            logging.debug('can not start tps')
-            raise
+            trace = sys.exc_info()[2]
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
         else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'start_tps_successful'])
             self.sleep(30)
 
     def connect_tps(self, tpsexepath):
         try:
             self._pw.connect(tpsexepath)
         except Exception as ex:
-            logging.debug('can not connect tps')
-            raise
-        self.sleep()
+            trace = sys.exc_info()[2]
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'connect_tps_successful'])
+            self.sleep()
 
     def login_tps(self, tpsexepath, user_name, password):
         try:
@@ -56,8 +60,10 @@ class CommonOperation(object):
             self._pg.type_write(password)
             self._pg.press_special_keyboard('enter')
         except Exception as ex:
-            logging.debug('login_tps fail')
-            raise
+            trace = sys.exc_info()[2]
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'login_tps_successful'])
 
     def logout_tps(self, tpsexepath):
         try:
@@ -65,8 +71,10 @@ class CommonOperation(object):
             self._pg.move_mouse(120, 961)
             self._pg.click_mouse()
         except Exception as ex:
-            logging.debug('logout_tps fail')
-            raise
+            trace = sys.exc_info()[2]
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'logout_tps_successful'])
 
     def close_tps_by_x(self):
         try:
@@ -74,9 +82,11 @@ class CommonOperation(object):
             self._pg.click_mouse()
         except Exception as ex:
             trace = sys.exc_info()[2]
-            tl.LoggingWrapper.record_logger(__name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+            # capture_screenshot for future use
             self._pg.capture_screenshot()
-            raise
+        else:
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'close_tps_by_x_successful'])
 
     def sleep(self, second=3):
         if not isinstance(second, type(cv.ConstValue.INT_FOR_TYPE)) or second < cv.ConstValue.ZERO_INT or second > cv.ConstValue.SIXTY_INT:

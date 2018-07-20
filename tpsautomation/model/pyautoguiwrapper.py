@@ -3,11 +3,9 @@
 
 ''' PyAutoGUI Wrapper '''
 
-#import logging
 import sys
 import os
 import re
-import logging.config
 import pyautogui
 import tpsautomation.common.tpslogging as tl
 import tpsautomation.common.constValue as cv
@@ -21,13 +19,7 @@ class PyautoGUIWrapper(object):
     __DEFAULT_PAUSE_TIME = 3
     __DEFAULT_FAIL_SAFE = True
 
-    # logger = c.LoggingWrapper.get_logger(__name__)
-    # todo:can not get config from LoggingWrapper
-    # todo:can not get config from LoggingWrapper
-    logging.config.fileConfig(cv.ConstValue.DEFAULT_CONFIG_FILE_PATH)
-
     def __init__(self):
-        # note : same pyautogui in each PyautoGUIWrapper
         # note : same pyautogui in each PyautoGUIWrapper
         self._pyautogui = pyautogui
         self.__init_config()
@@ -56,46 +48,39 @@ class PyautoGUIWrapper(object):
 
     def check_screen_resolution(self):
         screen_width, screen_height = self._pyautogui.size()
+        screen_width = 11
         try:
             if ((screen_width != PyautoGUIWrapper.__DEFAULT_SCREEN_WIDTH) or (screen_height != PyautoGUIWrapper.__DEFAULT_SCREEN_HEIGHT)):
-                raise
-        except:
+                raise ValueError
+        except ValueError as ex:
             trace = sys.exc_info()[2]
-            logging.error('file: %s function: %s lineno: %d (screen_width: %d, screen_height: %d)',
-                              __name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, screen_width, screen_height)
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
             # todo -- exit subprocess
             #os._exit(-1)
         else:
-            logging.debug('file: %s -- message: %s',
-                              __name__, 'checkScreenResolution successful')
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'checkScreenResolution_successful'])
 
     def move_mouse(self, x, y, duration=2):
         try:
             if ((type(x) != int) or (type(y) != int) or (type(duration) != int)):
-                raise
-        except:
+                raise TypeError
+        except TypeError as ex:
             trace = sys.exc_info()[2]
-            logging.error('file: %s function: %s lineno: %d (x: %d, y: %d, duration: %s)',
-                              __name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, x, y, duration)
-            # todo -- exit subprocess
-            #os._exit(-1)
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
         else:
-            logging.debug('file: %s -- message: %s', __name__, 'move_mouse successful')
             self._pyautogui.moveTo(x, y, duration)
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'move_mouse_successful'])
 
     def move_mouse_rel(self, x, y, duration=2):
         try:
             if ((type(x) != int) or (type(y) != int) or (type(duration) != int)):
-                raise
-        except:
+                raise TypeError
+        except TypeError as ex:
             trace = sys.exc_info()[2]
-            logging.error('file: %s function: %s lineno: %d (x: %d, y: %d, duration: %s)',
-                              __name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, x, y, duration)
-            # todo -- exit subprocess
-            #os._exit(-1)
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
         else:
-            logging.debug('file: %s -- message: %s', __name__, 'move_mouse_rel successful')
             self._pyautogui.moveRel(x, y, duration)
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'move_mouse_rel_successful'])
 
     def click_mouse(self):
         self._pyautogui.click()
@@ -110,16 +95,13 @@ class PyautoGUIWrapper(object):
     def drag_mouse(x, y, duration=0.25):
         try:
             if ((type(x) != int) or (type(y) != int) or (type(duration) != int)):
-                raise
-        except:
+                raise TypeError
+        except TypeError as ex:
             trace = sys.exc_info()[2]
-            logging.error('file: %s function: %s lineno: %d (x: %d, y: %d, duration: %s)',
-                              __name__, trace.tb_frame.f_code.co_name, trace.tb_lineno, x, y, duration)
-            # todo -- exit subprocess
-            #os._exit(-1)
+            tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
         else:
-            logging.debug('file: %s -- message: %s',__name__, 'drag_mouse successful')
             self._pyautogui.dragTo(x, y, duration)
+            tl.LoggingWrapper.record_debug(r'file: %s -- message: %s', *[__file__, 'drag_mouse_successful'])
         
     def drag_mouse_rel(self):
         pass
