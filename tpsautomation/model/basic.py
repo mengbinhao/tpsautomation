@@ -3,10 +3,11 @@
 
 ''' Basic model '''
 
-import tpsautomation.common.constValue as cv
+import tpsautomation.common.constvalue as cv
+
 
 class Basic(object):
-
+    ''' Basic model '''
     INT_ZERO = 0  # child can access
     __MAX_NAME_LENGTH = 100
     __MAX_ID = 10000
@@ -36,9 +37,11 @@ class Basic(object):
     """
 
     def get_name(self):
-         return self._name
+        ''' get_name '''
+        return self._name
 
     def set_name(self, value):
+        ''' set_name '''
         if not isinstance(value, type(cv.ConstValue.STR_FOR_TYPE)):
             raise TypeError
         length = len(value.strip())
@@ -47,9 +50,11 @@ class Basic(object):
         self._name = value
 
     def get_id(self):
-         return self._id
+        ''' get_id '''
+        return self._id
 
     def set_id(self, value):
+        ''' set_id '''
         if not isinstance(value, type(cv.ConstValue.INT_FOR_TYPE)):
             raise TypeError
         if value < Basic.INT_ZERO or value > Basic.__MAX_ID:

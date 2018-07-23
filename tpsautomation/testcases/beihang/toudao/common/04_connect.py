@@ -1,8 +1,8 @@
+''' connect case '''
 import sys
 import tpsautomation.operation.commonoperation as co
 
-tpsexepath = sys.argv[1]
+tps_exe_path = sys.argv[1]
 
 co_obj = co.CommonOperation()
-co_obj.connect_tps(tpsexepath)
-
+co_obj.connect_tps(tps_exe_path)

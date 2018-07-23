@@ -31,11 +31,13 @@ class TestUM:
     def teardown(self):
         print("teardown          class:TestStuff")
 
-    def setup_class(cls):
-        print("setup_class       class:%s" % cls.__name__)
+    def setup_class(self):
+        pass
+        #print("setup_class       class:%s" % cls.__name__)
 
-    def teardown_class(cls):
-        print("teardown_class    class:%s" % cls.__name__)
+    def teardown_class(self):
+        pass
+        #print("teardown_class    class:%s" % cls.__name__)
 
     def setup_method(self, method):
         print("setup_method      method:%s" % method.__name__)

@@ -35,7 +35,13 @@
 
 - pyautogui
 
-- autopep8  (format py code     vscode -> setting.json --> "python.formatting.provider": "autopep8")
+- autopep8  (format py code     vscode -> setting.json --> "python.formatting.provider": "autopep8")      ( other format lib yapf / black)
+
+- pylint   (use .pylintrc to static check py)   (other lint lib flake8 / mypy / pep8 / prospector / pydocstyle / pylama)
+
+- rope for vscode refactor
+
+- virtualenv and  mkvirtualenv  
 
 - add  PYTHONPATH=C:\Users\xxxxxx\Desktop\tpsautomation to path (so can find custom module and use pytest)
 

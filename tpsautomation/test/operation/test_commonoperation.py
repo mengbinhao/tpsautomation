@@ -1,5 +1,5 @@
-import pytest
 import tpsautomation.operation.commonoperation as co
+
 
 def test_sleep():
     co1 = co.CommonOperation()

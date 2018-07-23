@@ -58,27 +58,27 @@ def test_add_word_to_dict():
     assert excinfo.type.__name__ == 'ValueError'
 
 
-def test_get_intersection_key_of_two_dict():
+def test_get_intersection_key():
     d = {'a': 1, 'b': 2, 'c': 3}
     e = {'b': 2, 'c': 3, 'd': 4}
 
     assert tu.TypeUtils.is_list(
-        du.DictUtils.get_intersection_key_of_two_dict(d, e))
+        du.DictUtils.get_intersection_key(d, e))
 
     with pytest.raises(TypeError) as excinfo:
-        du.DictUtils.get_intersection_key_of_two_dict()
+        du.DictUtils.get_intersection_key()
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-         du.DictUtils.get_intersection_key_of_two_dict(None, None)
+        du.DictUtils.get_intersection_key(None, None)
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-         du.DictUtils.get_intersection_key_of_two_dict(d, 1)
+        du.DictUtils.get_intersection_key(d, 1)
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-         du.DictUtils.get_intersection_key_of_two_dict(1, d)
+        du.DictUtils.get_intersection_key(1, d)
     assert excinfo.type.__name__ == 'TypeError'
 
 
@@ -130,6 +130,7 @@ def test_get_specific_word_value():
 
 
 def test_class_to_dict():
-    c1 = cr.CaseResult(1, 'case01', 'pass', datu.DateAndTimeUtils.get_today_as_str(), 333, 'success', 'laaaaaaaaa')
-    #print(c1.__dict__)
+    c1 = cr.CaseResult(1, 'case01', 'pass', datu.DateAndTimeUtils.get_today_as_str(
+    ), 333, 'success', 'laaaaaaaaa')
+    # print(c1.__dict__)
     print(du.DictUtils.class_to_dict(c1))

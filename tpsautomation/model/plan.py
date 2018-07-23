@@ -3,7 +3,7 @@
 
 ''' PLan model '''
 
-import re
 
 class PLan(object):
+    ''' PLan model '''
     pass

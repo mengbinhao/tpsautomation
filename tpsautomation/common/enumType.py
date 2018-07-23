@@ -5,8 +5,10 @@
 
 from enum import Enum, unique
 
+
 @unique
 class PythonBuildInType(Enum):
+    ''' enum of python bulid-in type '''
     intType = 'int'
     strType = 'str'
     boolType = 'bool'
@@ -25,6 +27,7 @@ class PythonBuildInType(Enum):
     memoryviewType = 'memoryview'
     frozensetType = 'frozenset'
     complexType = 'complex'
+
 
 """
     for name, member in PythonBuildInType.__members__.items():

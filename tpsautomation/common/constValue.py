@@ -5,11 +5,12 @@
 
 import datetime
 
-class ConstValue():
 
+class ConstValue():
+    ''' const paramter for project '''
     CONFIG_DEFAULT_SECTION = 'DEFAULT'
     DICT_NON_EXIST_VALUE = 'not found'
-    
+
     STR_FOR_TYPE = 'str'
     INT_FOR_TYPE = 888
     BOOLEAN_FOR_TYPE = True

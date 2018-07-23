@@ -3,12 +3,12 @@
 
 ''' generate HTMLReport '''
 import os
-import tpsautomation.common.constValue as cv
+import tpsautomation.common.constvalue as cv
 import tpsautomation.utils.dateandtimeutils as datu
 
 
 class HTMLReport(object):
-
+    ''' generate HTMLReport '''
     HTML_TMPL = """
         <!DOCTYPE html>
         <html lang="en">
@@ -58,12 +58,13 @@ class HTMLReport(object):
 
     @staticmethod
     def generete_html_report(result_list, title, path, casepath):
+        ''' generete_html_report '''
         table_tr0 = ''
-        count = 0
         numfail = 0
         numsucc = 0
         output = ''
-        if len(result_list) > 0:
+        length = len(result_list)
+        if length > 0:
             output = HTMLReport.genarete_table(
                 result_list, table_tr0, numfail, numsucc, title, casepath)
         else:
@@ -71,12 +72,13 @@ class HTMLReport(object):
                 result_list, table_tr0, numfail, numsucc, title, casepath)
 
         name = datu.DateAndTimeUtils.get_today_and_timestamp_as_str_from_timestamp()
-        
-        with open(path + os.sep + name + cv.ConstValue.HTML_SUFFIX, 'wb') as f:
-            f.write(output.encode('utf-8'))
+
+        with open(path + os.sep + name + cv.ConstValue.HTML_SUFFIX, 'wb') as file:
+            file.write(output.encode('utf-8'))
 
     @staticmethod
     def genarete_table(result_list, table_tr0, numfail, numsucc, title, casepath):
+        ''' genarete_table '''
         for i in result_list:
             table_td = HTMLReport.TABLE_TMPL % i
             table_tr0 += table_td
@@ -88,12 +90,14 @@ class HTMLReport(object):
 
     @staticmethod
     def genarete_empty_table(result_list, table_tr0, numfail, numsucc, title, casepath):
+        ''' genarete_empty_table '''
         table_td = HTMLReport.TABLE_TMPL_NO_CASE
         table_tr0 += table_td
         return HTMLReport.genarete_output(len(result_list), table_tr0, numfail, numsucc, title, casepath)
 
     @staticmethod
     def genarete_output(length, table_tr0, numfail, numsucc, title, casepath):
+        ''' genarete_output '''
         output = HTMLReport.HTML_TMPL % dict(
             title=title,
             casepath=casepath,

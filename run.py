@@ -6,7 +6,7 @@ import subprocess
 import time
 import math
 import sys
-import tpsautomation.common.constValue as cv
+import tpsautomation.common.constvalue as cv
 import tpsautomation.common.tpsconfig as tc
 import tpsautomation.common.tpslogging as tl
 import tpsautomation.utils.fileutils as fu
@@ -18,47 +18,53 @@ import tpsautomation.report.htmlreport as hr
 
 
 def init():
-    tc.configWrapper.init_config()
+    ''' init project config '''
+    tc.ConfigWrapper.init_config()
     print('Initialize config Done')
 
-def get_tps_env(dict):
-    tpsexepath = dict.get('tpsexepath', cv.ConstValue.DICT_NON_EXIST_VALUE)
-    tpsroot = dict.get('tpsroot', cv.ConstValue.DICT_NON_EXIST_VALUE)
-    if tpsexepath == cv.ConstValue.DICT_NON_EXIST_VALUE or tpsroot == cv.ConstValue.DICT_NON_EXIST_VALUE:
+
+def get_tps_env(config):
+    ''' get tps location from config '''
+    tps_exe_path = config.get('tpsexepath', cv.ConstValue.DICT_NON_EXIST_VALUE)
+    tps_root = config.get('tpsroot', cv.ConstValue.DICT_NON_EXIST_VALUE)
+    if tps_exe_path == cv.ConstValue.DICT_NON_EXIST_VALUE or tps_root == cv.ConstValue.DICT_NON_EXIST_VALUE:
         raise ValueError
-    return tpsexepath, tpsroot
+    return tps_exe_path, tps_root
 
 
-def get_case_type(args, dict):
+def get_case_type(args, config):
+    ''' get which type want to run '''
     try:
         cases_bh_toudao = 'cases_bh_toudao'
         if args[1]:
             if args[1].lower() == cv.ConstValue.CASE_TYPE_TOUDAO:
-                return dict.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
+                return config.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
             elif args[1].lower() == cv.ConstValue.CASE_TYPE_TIDAO:
-                return dict.get('cases_bh_tidao', cv.ConstValue.CASE_TYPE_TIDAO)
+                return config.get('cases_bh_tidao', cv.ConstValue.CASE_TYPE_TIDAO)
             elif args[1].lower() == cv.ConstValue.CASE_TYPE_PROWESS:
-                return dict.get('cases_prowess', cv.ConstValue.CASE_TYPE_PROWESS)
-    except Exception as ex:
-       return dict.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
+                return config.get('cases_prowess', cv.ConstValue.CASE_TYPE_PROWESS)
+    except ValueError:
+        return config.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
 
 
 if __name__ == '__main__':
+
     print('Automation Start')
     result_list = []
-    try:  
+    try:
         init()
-        tpsexepath, tpsroot = get_tps_env(tc.configWrapper.config)
+        tpsexepath, tpsroot = get_tps_env(tc.ConfigWrapper.config)
 
-        #kill tps if needed
+        # kill tps if needed
         co_obj = co.CommonOperation()
         co_obj.kill_tps_application_if_needed(tpsexepath)
 
-        cases_root = get_case_type(sys.argv, tc.configWrapper.config)
+        cases_root = get_case_type(sys.argv, tc.ConfigWrapper.config)
         case_list = fu.FileUtils.get_case_list(cases_root)
-        #case like 01_xxx,  02_yyy
+        # case like 01_xxx,  02_yyy
         case_list.sort()
-        tl.LoggingWrapper.record_debug(r'excute %s cases------%s', *[len(case_list), case_list])
+        tl.LoggingWrapper.record_debug(
+            r'excute %s cases------%s', *[len(case_list), case_list])
         count = 1
         for case in case_list:
             run_result = ''
@@ -70,11 +76,11 @@ if __name__ == '__main__':
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 cwd=tpsroot)
-            #x.wait()
+            # x.wait()
             output, err_output = x.communicate()
             end_time = time.time()
             #retcode = x.poll()
-            if (x.returncode == 0):
+            if x.returncode == 0:
                 run_result = cv.ConstValue.CASE_PASS_RESULT
                 html_class = cv.ConstValue.HTML_PASS_CLASS
                 run_reason = cv.ConstValue.HTML_REASON_SUCCESS
@@ -89,14 +95,15 @@ if __name__ == '__main__':
                 math.ceil(end_time - start_time), html_class, run_reason)
             result_list.append(du.DictUtils.class_to_dict(case_result))
             count += 1
-    #can not catch any subprocess exception
-    except Exception as ex:
+    # can not catch any subprocess exception
+    except RuntimeError as ex:
         trace = sys.exc_info()[2]
-        tl.LoggingWrapper.record_error(__file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
+        tl.LoggingWrapper.record_error(
+            __file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
     finally:
-        html_title = tc.configWrapper.config.get(
+        html_title = tc.ConfigWrapper.config.get(
             'html_title', cv.ConstValue.DICT_NON_EXIST_VALUE)
-        html_report_path = tc.configWrapper.config.get(
+        html_report_path = tc.ConfigWrapper.config.get(
             'html_report_path', cv.ConstValue.DICT_NON_EXIST_VALUE)
         hr.HTMLReport.generete_html_report(result_list, html_title,
                                            html_report_path, cases_root)

@@ -3,14 +3,15 @@
 
 ''' wrapper some convenient method for str '''
 
-class StrUtils(object):
 
-    ''' is_str_likes '''
+class StrUtils(object):
+    ''' wrapper some convenient method for str '''
     @staticmethod
     def is_str_like(arg):
+        ''' is_str_likes '''
         try:
             arg + ''
-        except:
+        except TypeError:
             return False
         else:
             return True

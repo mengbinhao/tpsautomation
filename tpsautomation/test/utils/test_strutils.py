@@ -17,7 +17,6 @@ def test_is_str_like():
     f = __internal_fun
     assert not su.StrUtils.is_str_like(f)
 
-    
     assert su.StrUtils.is_str_like('1')
 
     with pytest.raises(TypeError) as excinfo:

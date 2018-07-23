@@ -2,9 +2,18 @@
 
     "python.pythonPath": "C:\\Users\\T5810\\Desktop\\python_envs\\env36\\Scripts\\python.exe",
     //"python.pythonPath": "C:\\Users\\T5810\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
-    "python.linting.pylintEnabled": false,
     "workbench.iconTheme": "vscode-icons",
     "editor.fontSize": 18,
     "terminal.integrated.fontSize": 18,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "vscode-mysql.enableTelemetry": false,
+    "python.autoComplete.addBrackets": true,
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.ignorePatterns": [
+        ".vscode/*.py",
+        "**/site-packages/**/*.py",
+        "**/tpsautomation/test/**/*.py"
+    ],
 }

@@ -3,7 +3,7 @@
 
 ''' Contour model '''
 
-import re
 
 class Contour(object):
+    ''' Contour model '''
     pass
