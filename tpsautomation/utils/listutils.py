@@ -4,7 +4,7 @@
 ''' wrapper some convenient method for list '''
 
 
-class ListUtils(object):
+class ListUtils():
     ''' wrapper some convenient method for list '''
     @staticmethod
     def filter_empty_string_in_list(target_list):

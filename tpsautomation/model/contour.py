@@ -4,6 +4,6 @@
 ''' Contour model '''
 
 
-class Contour(object):
+class Contour():
     ''' Contour model '''
     pass

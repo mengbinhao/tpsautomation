@@ -33,56 +33,56 @@ def test_init_config():
         c.ConfigWrapper.config) == 0
 
 
-def test_get_special_value_in_cache():
+def test_get_value_in_cache():
     c.ConfigWrapper.init_config()
-    assert c.ConfigWrapper.get_special_value_in_cache('tester') == 'jack'
-    assert c.ConfigWrapper.get_special_value_in_cache(
+    assert c.ConfigWrapper.get_value_in_cache('tester') == 'jack'
+    assert c.ConfigWrapper.get_value_in_cache(
         'testerlala') == 'not found'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_in_cache()
+        c.ConfigWrapper.get_value_in_cache()
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_in_cache(1)
+        c.ConfigWrapper.get_value_in_cache(1)
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_in_cache(())
+        c.ConfigWrapper.get_value_in_cache(())
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_in_cache([])
+        c.ConfigWrapper.get_value_in_cache([])
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_in_cache({})
+        c.ConfigWrapper.get_value_in_cache({})
     assert excinfo.type.__name__ == 'TypeError'
 
     c.ConfigWrapper.config.clear()
 
 
-def test_get_special_value_from_config_file():
+def test_get_value_from_config_file():
     c.ConfigWrapper.init_config('ourunited.org')
-    ret = c.ConfigWrapper.get_special_value_from_config_file('tester')
+    ret = c.ConfigWrapper.get_value_from_config_file('tester')
     assert ret == 'jack'
     # conf.config.clear()
 
     with pytest.raises(KeyError) as excinfo:
-        c.ConfigWrapper.get_special_value_from_config_file('tester1')
+        c.ConfigWrapper.get_value_from_config_file('tester1')
     assert excinfo.type.__name__ == 'KeyError'
 
     with pytest.raises(TypeError) as excinfo:
-        c.ConfigWrapper.get_special_value_from_config_file()
+        c.ConfigWrapper.get_value_from_config_file()
     assert excinfo.type.__name__ == 'TypeError'
 
     with pytest.raises(KeyError) as excinfo:
-        c.ConfigWrapper.get_special_value_from_config_file(
+        c.ConfigWrapper.get_value_from_config_file(
             'tester', 'ourunited.org1')
     assert excinfo.type.__name__ == 'KeyError'
 
     with pytest.raises(KeyError) as excinfo:
-        c.ConfigWrapper.get_special_value_from_config_file(
+        c.ConfigWrapper.get_value_from_config_file(
             'tester1', 'ourunited.org')
     assert excinfo.type.__name__ == 'KeyError'
 

@@ -7,7 +7,7 @@ import tpsautomation.utils.typeutils as tu
 import tpsautomation.common.constvalue as cv
 
 
-class DictUtils(object):
+class DictUtils():
     ''' wrapper some convenient method for dict '''
     @staticmethod
     def make_dict(**kw):

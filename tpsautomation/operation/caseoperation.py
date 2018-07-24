@@ -3,10 +3,8 @@
 
 ''' wrapper method for operating case '''
 
-import tpsautomation.model.case as c
 
-
-class CaseOperation(object):
+class CaseOperation():
     ''' wrapper method for operating case '''
 
     def __init__(self):

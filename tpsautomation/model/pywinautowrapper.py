@@ -7,7 +7,7 @@ import time
 from pywinauto import application, mouse
 
 
-class PywinautoWrapper(object):
+class PywinautoWrapper():
     ''' Pywinauto Wrapper '''
     SLEEP_TIME = 2
     TITLE_BAR = 'TitleBar'
@@ -30,7 +30,7 @@ class PywinautoWrapper(object):
 
     def connect(self, title_or_path, type_val=None):
         ''' defuale conncect by path, or by title
-            _app.connect_(path = r"c:\windows\system32\notepad.exe")
+            _app.connect_(path = r'c:\windows\system32\notepad.exe')
             _app.connect_(process = 2341)
             _app.connect_(handle = 0x010f0c)
         '''

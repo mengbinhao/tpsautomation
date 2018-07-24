@@ -9,7 +9,7 @@ import os
 import tpsautomation.common.constvalue as cv
 
 
-class LoggingWrapper(object):
+class LoggingWrapper():
     ''' logging wrapper object '''
     conf_path = r'C:\Users\T5810\Desktop\tpsautomation'
     __file_name = 'logger.conf'
@@ -53,13 +53,12 @@ class LoggingWrapper(object):
         logging.error('file: %s function: %s lineno: %d args: %s)',
                       file_name, fun_name, line_number, args)
 
-    ''' use eval handle Dynamic param, but can not record detailed info in log
-        like :2018-07-20 14:24:30       <string>  [line:1] root:  DEBUG    excute 3 cases------[case1, case2, case3]
-        message_template only use %s
-    '''
     @staticmethod
     def record_debug_eval(*args):
-        ''' record_debug_eval '''
+        ''' use eval handle Dynamic param, but can not record detailed info in log
+            like :2018-07-20 14:24:30       <string>  [line:1] root:  DEBUG    excute 3 cases------[case1, case2, case3]
+            message_template only use %s
+        '''
         tmp = "logging.debug(message_template, "
         for item in args:
             tmp += 'r\'' + str(item) + '\''

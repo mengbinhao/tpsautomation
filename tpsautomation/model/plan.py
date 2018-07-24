@@ -4,6 +4,6 @@
 ''' PLan model '''
 
 
-class PLan(object):
+class PLan():
     ''' PLan model '''
     pass

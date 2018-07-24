@@ -4,7 +4,7 @@
 ''' wrapper some convenient method for str '''
 
 
-class StrUtils(object):
+class StrUtils():
     ''' wrapper some convenient method for str '''
     @staticmethod
     def is_str_like(arg):

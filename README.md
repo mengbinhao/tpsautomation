@@ -132,12 +132,19 @@
     git reflot
     git reset --hard  version
     ```
+    
 
 5.  change project
+
     -   change C:\Users\computer_name  to  new computer_name in project file  (*.py  .ini)
 
     -   change TPS location in project files (.ini)
 
+    -   pylint ./tpsautomation/   +  .pylintrc
+
+    -   pytest ./tpsautomation/test + pytest.ini   
+
+        pytest ./tpsautomation/test/ --html=C:/Users/XXXX\Desktop/tpsautomation/tpsautomation/test/log/result.html
 
 
 

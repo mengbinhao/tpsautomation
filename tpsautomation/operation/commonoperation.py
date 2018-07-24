@@ -11,7 +11,7 @@ import tpsautomation.model.pyautoguiwrapper as pg
 import tpsautomation.common.constvalue as cv
 
 
-class CommonOperation(object):
+class CommonOperation():
     ''' wrapper method for operating common function of TPS'''
 
     def __init__(self):

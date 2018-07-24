@@ -36,7 +36,7 @@ class CaseResult(Basic):
         if not isinstance(value, type(cv.ConstValue.STR_FOR_TYPE)):
             raise TypeError
         value = value.strip()
-        if value != cv.ConstValue.CASE_FAIL_RESULT and value != cv.ConstValue.CASE_PASS_RESULT:
+        if value not in (cv.ConstValue.CASE_FAIL_RESULT, cv.ConstValue.CASE_PASS_RESULT):
             raise ValueError
         self._run_result = value
 
@@ -48,7 +48,7 @@ class CaseResult(Basic):
         ''' set_run_time '''
         if not isinstance(value, type(cv.ConstValue.STR_FOR_TYPE)):
             raise TypeError
-        if not re.search('^\d{4}-\d{2}-\d{2}$', value.strip()):
+        if not re.search(r'^\d{4}-\d{2}-\d{2}$', value.strip()):
             raise ValueError
         self._run_time = value
 
@@ -74,7 +74,7 @@ class CaseResult(Basic):
         if not isinstance(value, type(cv.ConstValue.STR_FOR_TYPE)):
             raise TypeError
         value = value.strip()
-        if value != cv.ConstValue.HTML_ACTIVE_CLASS and value != cv.ConstValue.HTML_PASS_CLASS and value != cv.ConstValue.HTML_FAIL_CLASS:
+        if value not in (cv.ConstValue.HTML_ACTIVE_CLASS, cv.ConstValue.HTML_PASS_CLASS, cv.ConstValue.HTML_FAIL_CLASS):
             raise ValueError
         self._html_class = value
 

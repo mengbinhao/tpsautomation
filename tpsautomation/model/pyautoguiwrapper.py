@@ -12,7 +12,7 @@ import tpsautomation.common.tpsconfig as tc
 import tpsautomation.utils.typeutils as tu
 
 
-class PyautoGUIWrapper(object):
+class PyautoGUIWrapper():
     ''' PyAutoGUI Wrapper '''
     __DEFAULT_SCREEN_WIDTH = 1920
     __DEFAULT_SCREEN_HEIGHT = 1080
@@ -137,12 +137,12 @@ class PyautoGUIWrapper(object):
         ''' draw_rect '''
         distance = 200
         while distance > 0:
-            pyautogui.dragRel(distance, 0, duration=0.5)
+            self._pyautogui.dragRel(distance, 0, duration=0.5)
             distance -= 5
-            pyautogui.dragRel(0, distance, duration=0.5)
-            pyautogui.dragRel(-distance, 0, duration=0.5)
+            self._pyautogui.dragRel(0, distance, duration=0.5)
+            self._pyautogui.dragRel(-distance, 0, duration=0.5)
             distance -= 5
-            pyautogui.dragRel(0, -distance, duration=0.5)
+            self._pyautogui.dragRel(0, -distance, duration=0.5)
 
     def type_write(self, str_val, interval=1):
         ''' type_write '''

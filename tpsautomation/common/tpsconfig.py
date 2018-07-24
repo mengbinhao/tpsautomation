@@ -9,7 +9,7 @@ import tpsautomation.utils.typeutils as tu
 import tpsautomation.common.constvalue as cv
 
 
-class ConfigWrapper(object):
+class ConfigWrapper():
     ''' config wrapper object '''
     config = {}
     file_name = 'conf.ini'
@@ -22,12 +22,12 @@ class ConfigWrapper(object):
 
     @staticmethod
     def __read_config_file():
-        cp = configparser.ConfigParser()
+        config_parser = configparser.ConfigParser()
         # os.path means which folder runs py
         # so need to run py at root folder of project C:\\Users\OUR\Desktop\\tpsautomation
-        cp.read(os.path.abspath('.') + os.sep +
-                ConfigWrapper.file_name, encoding='utf-8')
-        return cp
+        config_parser.read(os.path.abspath('.') + os.sep +
+                           ConfigWrapper.file_name, encoding='utf-8')
+        return config_parser
 
     @staticmethod
     def init_config(section=None):
@@ -42,8 +42,7 @@ class ConfigWrapper(object):
     @staticmethod
     def init_config_by_default():
         ''' init_config_by_default '''
-        cp = ConfigWrapper.__read_config_file()
-        default = cp.defaults()
+        default = ConfigWrapper.__read_config_file().defaults()
         for item in default:
             ConfigWrapper.config[item] = default[item].strip()
 
@@ -51,28 +50,28 @@ class ConfigWrapper(object):
     def init_config_with_section(section):
         ''' init_config_with_section '''
         ConfigWrapper.__check_str_param(section)
-        cp = ConfigWrapper.__read_config_file()
+        config_parser = ConfigWrapper.__read_config_file()
         # include default pairs
         # if section does not exist return  {}
-        if cp.has_section(section):
-            pairs = cp.items(section)
+        if config_parser.has_section(section):
+            pairs = config_parser.items(section)
             for key, val in pairs:
                 ConfigWrapper.config[key] = val.strip()
 
     @staticmethod
-    def get_special_value_in_cache(key):
-        ''' get_special_value_in_cache '''
+    def get_value_in_cache(key):
+        ''' get_value_in_cache '''
         ConfigWrapper.__check_str_param(key)
         return ConfigWrapper.config.get(key, cv.ConstValue.DICT_NON_EXIST_VALUE)
 
     @staticmethod
-    def get_special_value_from_config_file(key, section=None):
-        ''' get_special_value_from_config_file '''
+    def get_value_from_config_file(key, section=None):
+        ''' get_value_from_config_file '''
         ConfigWrapper.__check_str_param(key)
-        cp = ConfigWrapper.__read_config_file()
+        config_parser = ConfigWrapper.__read_config_file()
         if section is None or section.upper().strip() == cv.ConstValue.CONFIG_DEFAULT_SECTION:
-            return cp[cv.ConstValue.CONFIG_DEFAULT_SECTION][key]
-        return cp[section][key]
+            return config_parser[cv.ConstValue.CONFIG_DEFAULT_SECTION][key]
+        return config_parser[section][key]
 
     @staticmethod
     def reload_config(section=None):

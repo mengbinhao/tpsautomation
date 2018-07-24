@@ -3,27 +3,25 @@
 
 ''' wrapper method for operating user '''
 
-import tpsautomation.model.case as c
 
-
-class CaseOperation(object):
+class UserOperation():
     ''' wrapper method for operating user '''
 
     def __init__(self):
         pass
 
-    def add_case(self, case):
-        ''' add_case '''
+    def add_user(self, case):
+        ''' add_user '''
         pass
 
-    def edit_case(self, case):
-        ''' edit_case '''
+    def edit_user(self, case):
+        ''' edit_user '''
         pass
 
-    def delete_case(self, case):
-        ''' delete_case '''
+    def delete_user(self, case):
+        ''' delete_user '''
         pass
 
-    def delete_case_by_id(self, user_id):
-        ''' delete_case_by_id '''
+    def delete_user_by_id(self, user_id):
+        ''' delete_user_by_id '''
         pass

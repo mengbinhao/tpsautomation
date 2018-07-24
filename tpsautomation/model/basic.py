@@ -6,7 +6,7 @@
 import tpsautomation.common.constvalue as cv
 
 
-class Basic(object):
+class Basic():
     ''' Basic model '''
     INT_ZERO = 0  # child can access
     __MAX_NAME_LENGTH = 100
@@ -21,20 +21,18 @@ class Basic(object):
     def __str__(self):
         return 'id: %d - name: %s' % (self._id, self._name)
 
-    """
-    @property
-    def name(self):
-        return self._name
+    # @property
+    # def name(self):
+    #     return self._name
 
-    @name.setter
-    def name(self, name):
-        if not isinstance(name, type(cv.ConstValue.STR_FOR_TYPE)):
-            raise TypeError
-        length = len(name.strip())
-        if length == 0 or length > 20:
-            raise ValueError
-        self._name = name
-    """
+    # @name.setter
+    # def name(self, name):
+    #     if not isinstance(name, type(cv.ConstValue.STR_FOR_TYPE)):
+    #         raise TypeError
+    #     length = len(name.strip())
+    #     if length == 0 or length > 20:
+    #         raise ValueError
+    #     self._name = name
 
     def get_name(self):
         ''' get_name '''

@@ -6,7 +6,7 @@
 import tpsautomation.common.enumtype as et
 
 
-class TypeUtils(object):
+class TypeUtils():
     ''' wrapper some convenient method for type check simple type and complex type '''
     @staticmethod
     def __get_arg_type(arg):

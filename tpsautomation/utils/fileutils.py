@@ -7,7 +7,7 @@ import os
 import tpsautomation.common.constvalue as cv
 
 
-class FileUtils(object):
+class FileUtils():
     ''' wrapper some convenient method for file related '''
     @staticmethod
     def split_all(path):
@@ -97,10 +97,10 @@ class FileUtils(object):
     def get_case_list(root):
         ''' get_case_list '''
         result = []
-        for root, files in os.walk(root):
+        for root_dir, files in os.walk(root):
             for file_name in files:
                 if file_name.endswith(cv.ConstValue.PYTHON_SUFFIX):
-                    result.append(root + os.sep + file_name)
+                    result.append(root_dir + os.sep + file_name)
         return result
 
     @staticmethod

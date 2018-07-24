@@ -10,7 +10,7 @@ import math
 import tpsautomation.common.constvalue as cv
 
 
-class DateAndTimeUtils(object):
+class DateAndTimeUtils():
     ''' wrapper some convenient method for date and time '''
     @staticmethod
     def get_today_as_str(fmt=r'%Y-%m-%d'):
@@ -61,12 +61,12 @@ class DateAndTimeUtils(object):
         day = 24*60*60
         hour = 60*60
         minute = 60
-        if all_time >= 0 and all_time < 60:
+        if 0 <= all_time < 60:
             return "%d sec" % math.ceil(all_time)
-        elif all_time >= minute and all_time < hour:
+        elif minute <= all_time < hour:
             mins = divmod(all_time, minute)
             return "%d min, %d sec" % (int(mins[0]), math.ceil(mins[1]))
-        elif all_time >= hour and all_time < day:
+        elif hour <= all_time < day:
             hours = divmod(all_time, hour)
             return '%d hours, %s' % (int(hours[0]), DateAndTimeUtils.convert_seconds_to_display_time(hours[1]))
         elif all_time >= day:
