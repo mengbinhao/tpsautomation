@@ -51,6 +51,7 @@ if __name__ == '__main__':
 
     print('Automation Start')
     result_list = []
+    cases_root = []
     try:
         init()
         tpsexepath, tpsroot = get_tps_env(tc.ConfigWrapper.config)
@@ -79,7 +80,7 @@ if __name__ == '__main__':
             # x.wait()
             output, err_output = x.communicate()
             end_time = time.time()
-            #retcode = x.poll()
+            # retcode = x.poll()
             if x.returncode == 0:
                 run_result = cv.ConstValue.CASE_PASS_RESULT
                 html_class = cv.ConstValue.HTML_PASS_CLASS
@@ -96,7 +97,7 @@ if __name__ == '__main__':
             result_list.append(du.DictUtils.class_to_dict(case_result))
             count += 1
     # can not catch any subprocess exception
-    except RuntimeError as ex:
+    except Exception as ex:
         trace = sys.exc_info()[2]
         tl.LoggingWrapper.record_error(
             __file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)

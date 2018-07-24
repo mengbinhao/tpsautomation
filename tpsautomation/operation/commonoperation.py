@@ -23,7 +23,7 @@ class CommonOperation():
         try:
             self._pw.connect(tpsexepath)
             self._pw.kill_application()
-        except ValueError:
+        except Exception:
             tl.LoggingWrapper.record_debug(
                 r'file: %s -- message: %s', *[__file__, 'kill_tps_application_if_needed_fail'])
         else:

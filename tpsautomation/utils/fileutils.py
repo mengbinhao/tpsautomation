@@ -97,7 +97,7 @@ class FileUtils():
     def get_case_list(root):
         ''' get_case_list '''
         result = []
-        for root_dir, files in os.walk(root):
+        for root_dir, dirs, files in os.walk(root):
             for file_name in files:
                 if file_name.endswith(cv.ConstValue.PYTHON_SUFFIX):
                     result.append(root_dir + os.sep + file_name)

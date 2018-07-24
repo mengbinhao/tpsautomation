@@ -34,7 +34,7 @@ class LoggingWrapper():
         if not os.path.exists(config_file) or not os.path.isfile(config_file):
             msg = '%s configuration file does not exist!', config_file
             logging.getLogger(__name__).error(msg)
-            raise ValueError(msg)
+            raise FileNotFoundError(msg)
 
         try:
             logging.config.fileConfig(
