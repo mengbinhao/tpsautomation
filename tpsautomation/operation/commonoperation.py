@@ -23,6 +23,8 @@ class CommonOperation():
         try:
             self._pw.connect(tpsexepath)
             self._pw.kill_application()
+            # wait 1 minute for same user login again
+            self.sleep(60)
         except Exception:
             tl.LoggingWrapper.record_debug(
                 r'file: %s -- message: %s', *[__file__, 'kill_tps_application_if_needed_fail'])

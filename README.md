@@ -1,4 +1,4 @@
-### 1  skeleton
+### 1  Skeleton
 
 - bin
 
@@ -23,7 +23,7 @@
   
 
 
-### 2  requirements
+### 2  Requirements
 
 - use some application to check your app backend (win32 or uia) under gui-inspect-tool folder
 
@@ -53,7 +53,7 @@
 
 
 
-### 3  specification  
+### 3  Specification  
 
 1. 包名、模块名、局部变量名、函数名 (全小写+下划线)
 
@@ -74,11 +74,25 @@
 1. Win 7 professional 64 bit
 2. font size (100%, system recommend)
 3. monitor  resolution (1920 * 1080)
-4. UI can not be changed because locate with coordinate
-5. can not use two monitor, the display location of app is weird
-6. input method need to english language
+4. unnormal alert box (like user has login, unnormal exit confirm)
 
 
+
+### 5 Note
+
+1.  input method need to english language
+
+2.  UI can not be changed because locate with coordinate
+
+3.  can not use two monitor, the display location of app is weird
+
+4.  app UI must at the top of screen, so can click it
+
+5.  can not popup any box to change the focus (like update system/software、usb alert) 
+
+6.  screen could lock??????????
+
+    
 
 ### 5 Transfer
 
@@ -149,11 +163,13 @@
 
 ### 6 Problem
 
-1.  can not get return value from subprocess 
+1.  can not get return value from subprocess
 
-2.  can not create break point in subprocess while running main.py
+2.  can not pass global param to subprocess
 
-3.  can not catch real exception from  mouse click or type write use pyguiauto
+3.  can not create break point in subprocess while running main.py
+
+4.  can not catch real exception from  mouse click or type write use pyguiauto
 
     
 
@@ -162,7 +178,7 @@
 1.  integrate with jenkens (create slave, item, invoke main.py)
 2.  abstract exception
 3.  wrapper a context object
-4.  退出   每次登陆  执行完  退出   退出
+4.  hanle any unnormal tps popup box
 
 
 

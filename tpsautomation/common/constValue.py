@@ -38,6 +38,9 @@ class ConstValue():
     CASE_TYPE_TIDAO = 'tidao'
     CASE_TYPE_PROWESS = 'prowess'
 
+    CASE_LOGIN = r'C:\Users\T5810\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\startandexit\01_login.py'
+    CASE_EXIT = r'C:\Users\T5810\Desktop\tpsautomation\tpsautomation\testcases\beihang\toudao\startandexit\02_exit.py'
+
     HTML_ACTIVE_CLASS = 'active'
     HTML_PASS_CLASS = 'success'
     HTML_FAIL_CLASS = 'danger'

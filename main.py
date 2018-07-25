@@ -47,6 +47,28 @@ def get_case_type(args, config):
         return config.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
 
 
+def check_if_need_login(case_name):
+    ''' check_if_need_login '''
+    if case_name.find(cv.ConstValue.CASE_LOGIN) == -1:
+        x_1 = subprocess.Popen(
+            [cv.ConstValue.DEFAULT_PYTHON_EXE, cv.ConstValue.CASE_LOGIN, tpsexepath],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            cwd=tpsroot)
+        x_1.communicate()
+
+
+def check_if_need_exit(case_name):
+    ''' check_if_need_exit '''
+    if case_name.find(cv.ConstValue.CASE_EXIT) == -1:
+        x_2 = subprocess.Popen(
+            [cv.ConstValue.DEFAULT_PYTHON_EXE, cv.ConstValue.CASE_EXIT, tpsexepath],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            cwd=tpsroot)
+        x_2.communicate()
+
+
 if __name__ == '__main__':
 
     print('Automation Start')
@@ -62,12 +84,16 @@ if __name__ == '__main__':
 
         cases_root = get_case_type(sys.argv, tc.ConfigWrapper.config)
         case_list = fu.FileUtils.get_case_list(cases_root)
+        case_count = len(case_list)
         # case like 01_xxx,  02_yyy
         case_list.sort()
         tl.LoggingWrapper.record_debug(
-            r'excute %s cases------%s', *[len(case_list), case_list])
+            r'excute %s cases------%s', *[case_count, case_list])
         count = 1
+        print("need excute %d cases" % case_count)
         for case in case_list:
+            print('excuting', case)
+            check_if_need_login(case)
             run_result = ''
             html_class = cv.ConstValue.HTML_ACTIVE_CLASS
             run_reason = ''
@@ -77,10 +103,8 @@ if __name__ == '__main__':
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 cwd=tpsroot)
-            # x.wait()
             output, err_output = x.communicate()
             end_time = time.time()
-            # retcode = x.poll()
             if x.returncode == 0:
                 run_result = cv.ConstValue.CASE_PASS_RESULT
                 html_class = cv.ConstValue.HTML_PASS_CLASS
@@ -89,23 +113,29 @@ if __name__ == '__main__':
                 run_result = cv.ConstValue.CASE_FAIL_RESULT
                 html_class = cv.ConstValue.HTML_FAIL_CLASS
                 run_reason = output.decode(cv.ConstValue.UTF_8_STR)
-            case = case.replace(cases_root, '')
             case_result = cr.CaseResult(
-                count, case, run_result,
+                count, case.replace(cases_root, ''), run_result,
                 datu.DateAndTimeUtils.get_today_as_str(),
                 math.ceil(end_time - start_time), html_class, run_reason)
             result_list.append(du.DictUtils.class_to_dict(case_result))
             count += 1
+            check_if_need_exit(case)
+        print("excute %d cases done" % case_count)
     # can not catch any subprocess exception
     except Exception as ex:
         trace = sys.exc_info()[2]
         tl.LoggingWrapper.record_error(
             __file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
     finally:
+        # kill tps if needed
+        co_obj.kill_tps_application_if_needed(tpsexepath)
+
+        print("start generate html report")
         html_title = tc.ConfigWrapper.config.get(
             'htmltitle', cv.ConstValue.DICT_NON_EXIST_VALUE)
         html_report_path = tc.ConfigWrapper.config.get(
             'htmlreportpath', cv.ConstValue.DICT_NON_EXIST_VALUE)
         hr.HTMLReport.generete_html_report(result_list, html_title,
                                            html_report_path, cases_root)
+        print("generate html report done")
         print('Automation Finish')
