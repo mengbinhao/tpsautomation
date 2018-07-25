@@ -95,7 +95,7 @@
 
 4.  install node、git if needed
 
-    
+      
 
     ```
     git config --global user.name "xxxx" 
@@ -132,7 +132,6 @@
     git reflot
     git reset --hard  version
     ```
-    
 
 5.  change project
 
@@ -145,6 +144,33 @@
     -   pytest ./tpsautomation/test + pytest.ini   
 
         pytest ./tpsautomation/test/ --html=C:/Users/XXXX\Desktop/tpsautomation/tpsautomation/test/log/result.html
+
+        
+
+### 6 Problem
+
+1.  can not get return value from subprocess 
+
+2.  can not create break point in subprocess while running main.py
+
+3.  can not catch real exception from  mouse click or type write use pyguiauto
+
+    
+
+### 7 TODO
+
+1.  integrate with jenkens (create slave, item, invoke main.py)
+2.  abstract exception
+3.  wrapper a context object
+4.  退出   每次登陆  执行完  退出   退出
+
+
+
+
+
+
+
+
 
 
 

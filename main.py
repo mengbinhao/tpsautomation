@@ -35,15 +35,15 @@ def get_tps_env(config):
 def get_case_type(args, config):
     ''' get which type want to run '''
     try:
-        cases_bh_toudao = 'cases_bh_toudao'
+        cases_bh_toudao = 'casesbhtoudao'
         if args[1]:
             if args[1].lower() == cv.ConstValue.CASE_TYPE_TOUDAO:
                 return config.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
             elif args[1].lower() == cv.ConstValue.CASE_TYPE_TIDAO:
-                return config.get('cases_bh_tidao', cv.ConstValue.CASE_TYPE_TIDAO)
+                return config.get('casesbhtidao', cv.ConstValue.CASE_TYPE_TIDAO)
             elif args[1].lower() == cv.ConstValue.CASE_TYPE_PROWESS:
-                return config.get('cases_prowess', cv.ConstValue.CASE_TYPE_PROWESS)
-    except ValueError:
+                return config.get('casesprowess', cv.ConstValue.CASE_TYPE_PROWESS)
+    except IndexError:
         return config.get(cases_bh_toudao, cv.ConstValue.CASE_TYPE_TOUDAO)
 
 
@@ -103,9 +103,9 @@ if __name__ == '__main__':
             __file__, trace.tb_frame.f_code.co_name, trace.tb_lineno, ex.args)
     finally:
         html_title = tc.ConfigWrapper.config.get(
-            'html_title', cv.ConstValue.DICT_NON_EXIST_VALUE)
+            'htmltitle', cv.ConstValue.DICT_NON_EXIST_VALUE)
         html_report_path = tc.ConfigWrapper.config.get(
-            'html_report_path', cv.ConstValue.DICT_NON_EXIST_VALUE)
+            'htmlreportpath', cv.ConstValue.DICT_NON_EXIST_VALUE)
         hr.HTMLReport.generete_html_report(result_list, html_title,
                                            html_report_path, cases_root)
         print('Automation Finish')
