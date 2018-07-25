@@ -73,7 +73,7 @@
 
 1. Win 7 professional 64 bit
 2. font size (100%, system recommend)
-3. monitor  resolution (1920 * 1080)
+3. monitor resolution (1920 * 1080), desktop monitor
 4. unnormal alert box (like user has login, unnormal exit confirm)
 
 
