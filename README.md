@@ -18,7 +18,7 @@
 
 - other
 
-- pytest.ini  /  logger.conf  / conf.ini  /  TODO.md  /  README.md
+- pytest.ini  /  logger.conf  / conf.ini  / README.md
 
   
 
@@ -29,19 +29,18 @@
 
 - python 3.6.5
 
-- pytest (pytest-html、pytest-rerunfailures)
+- python lib
 
-- pywinauto
+  - pytest (pytest-html、pytest-rerunfailures)
+  - pywinauto
+  - pyautogui
+  - autopep8  (format py code     vscode -> setting.json --> "python.formatting.provider": "autopep8")      ( other format lib yapf / black)
+  - pylint   (use .pylintrc to static check py)   (other lint lib flake8 / mypy / pep8 / prospector / pydocstyle / pylama)
+  - virtualenv and  mkvirtualenv  
 
-- pyautogui
+- vscode plugin
 
-- autopep8  (format py code     vscode -> setting.json --> "python.formatting.provider": "autopep8")      ( other format lib yapf / black)
-
-- pylint   (use .pylintrc to static check py)   (other lint lib flake8 / mypy / pep8 / prospector / pydocstyle / pylama)
-
-- rope for vscode refactor
-
-- virtualenv and  mkvirtualenv  
+  - rope、python
 
 - add  PYTHONPATH=C:\Users\xxxxxx\Desktop\tpsautomation to path (so can find custom module and use pytest)
 
