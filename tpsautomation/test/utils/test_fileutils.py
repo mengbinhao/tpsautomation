@@ -22,17 +22,17 @@ def test_list_files():
 
 def test_get_file_abolute_path_if_exists():
     path = r'C:\Users\T5810\Desktop\tpsautomation'
-    file_name = r'TODO.md'
+    file_name = r'README.md'
     not_exist_file_name = r'TODO_notexist.md'
     assert fu.FileUtils.get_file_abolute_path_if_exists(
         not_exist_file_name, path) is None
     assert fu.FileUtils.get_file_abolute_path_if_exists(
-        file_name, path) == r'C:\Users\T5810\Desktop\tpsautomation\TODO.md'
+        file_name, path) == r'C:\Users\T5810\Desktop\tpsautomation\README.md'
 
 
 def test_if_file_or_dir_exists():
     assert fu.FileUtils.is_file_or_dir_exists(
-        r'C:\Users\T5810\Desktop\tpsautomation\TODO.md') is True
+        r'C:\Users\T5810\Desktop\tpsautomation\README.md') is True
     assert fu.FileUtils.is_file_or_dir_exists(
         r'C:\Users\T5810\Desktop\tpsautomation\bin') is True
     assert fu.FileUtils.is_file_or_dir_exists(
