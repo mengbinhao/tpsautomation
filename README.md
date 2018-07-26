@@ -158,6 +158,8 @@
 
         pytest ./tpsautomation/test/ --html=C:/Users/XXXX\Desktop/tpsautomation/tpsautomation/test/log/result.html
 
+    -   create a shortcut of tps.bat file (adjust the window location property)
+
         
 
 ### 6 Problem
