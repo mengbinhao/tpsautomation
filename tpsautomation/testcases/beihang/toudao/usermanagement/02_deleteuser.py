@@ -7,3 +7,4 @@ new_user_name = 'zatest'
 # according exists user, delete user zatest(Technician)
 uo_obj = uo.UserOperation()
 uo_obj.delete_user()
+uo_obj = None

@@ -10,3 +10,4 @@ co_obj = co.CommonOperation()
 co_obj.start_tps(tps_exe_path)
 co_obj.connect_tps(tps_exe_path)
 co_obj.login_tps(user_name, password)
+co_obj = None

@@ -10,3 +10,5 @@ user_type = 1
 u = User.User(new_user_id, new_user_name, password, user_type)
 uo_obj = uo.UserOperation()
 uo_obj.add_user(u)
+uo_obj = None
+u = None

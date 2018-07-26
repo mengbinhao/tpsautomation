@@ -89,10 +89,10 @@ if __name__ == '__main__':
         case_list.sort()
         tl.LoggingWrapper.record_debug(
             r'excute %s cases------%s', *[case_count, case_list])
+        print("Need excute %d cases" % case_count)
         count = 1
-        print("need excute %d cases" % case_count)
         for case in case_list:
-            print('excuting', case)
+            print('case %d -- Excuting %s' % (count, case))
             check_if_need_login(case)
             run_result = ''
             html_class = cv.ConstValue.HTML_ACTIVE_CLASS
@@ -120,7 +120,7 @@ if __name__ == '__main__':
             result_list.append(du.DictUtils.class_to_dict(case_result))
             count += 1
             check_if_need_exit(case)
-        print("excute %d cases done" % case_count)
+        print("Excute %d cases Done" % case_count)
     # can not catch any subprocess exception
     except Exception as ex:
         trace = sys.exc_info()[2]
@@ -130,12 +130,12 @@ if __name__ == '__main__':
         # kill tps if needed
         co_obj.kill_tps_application_if_needed(tpsexepath)
 
-        print("start generate html report")
+        print("Start generate html report")
         html_title = tc.ConfigWrapper.config.get(
             'htmltitle', cv.ConstValue.DICT_NON_EXIST_VALUE)
         html_report_path = tc.ConfigWrapper.config.get(
             'htmlreportpath', cv.ConstValue.DICT_NON_EXIST_VALUE)
         hr.HTMLReport.generete_html_report(result_list, html_title,
                                            html_report_path, cases_root)
-        print("generate html report done")
+        print("Generate html report Done")
         print('Automation Finish')
