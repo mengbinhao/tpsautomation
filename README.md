@@ -70,28 +70,27 @@
 
 ### 4 TPS  requirement
 
-1. Win 7 professional 64 bit
-2. font size (100%, system recommend)
-3. monitor resolution (1920 * 1080), desktop monitor
+1. desktop monitor resolution (1920 * 1080)
+2. Win 7 professional 32/64 bit
+3. font size (system recommend), can not be changed
 4. unnormal alert box (like user has login, unnormal exit confirm)
+5. can not use two monitor, the display location of app is weird
 
 
 
 ### 5 Note
 
-1.  input method need to english language
+1.  input method default is  english language
 
 2.  UI can not be changed because locate with coordinate
 
-3.  can not use two monitor, the display location of app is weird
+3.  app UI must at the top of screen, so can click it
 
-4.  app UI must at the top of screen, so can click it
+4.  can not popup any box to change the focus (like update system/software、usb alert popup) 
 
-5.  can not popup any box to change the focus (like update system/software、usb alert) 
+5.  screen can not be locked
 
-6.  screen could lock??????????
-
-    
+      
 
 ### 5 Transfer
 
@@ -108,7 +107,7 @@
 
 4.  install node、git if needed
 
-      
+  ​    
 
     ```
     git config --global user.name "xxxx" 
